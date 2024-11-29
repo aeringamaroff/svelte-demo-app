@@ -16,12 +16,8 @@ export async function GET({ url }) {
 		const database = client.db('expense-tracker');
 		const expenses = database.collection('user_expenses');
 
-		// Query for a movie that has the title 'Back to the Future'
 		const query = { user_id: userId };
 		const expense = await expenses.find(query).sort({ date: -1 }).toArray();
-
-		console.log('EXPENSES ARRAY', expense);
-		console.log('EXPENSES RESPONSE OBJECT', json(expense));
 
 		return json(expense);
 	} catch (error) {
