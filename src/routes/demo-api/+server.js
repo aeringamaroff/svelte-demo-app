@@ -1,14 +1,15 @@
 import { MongoClient } from 'mongodb';
-import { MONGODB_PASSWORD } from '$env/static/private';
+import { MONGODB_PASSWORD, MONGODB_USER } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 
-const uri = `mongodb+srv://aeringamaroff:${MONGODB_PASSWORD}@ruby-cluster.twqrq.mongodb.net/?retryWrites=true&w=majority&appName=ruby-cluster`;
+const uri = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@ruby-cluster.twqrq.mongodb.net/?retryWrites=true&w=majority&appName=ruby-cluster`;
 
 const client = new MongoClient(uri);
 
 export async function GET({ url }) {
 	try {
 		const userId = await url.searchParams.get('user_id');
+
 		if (!userId) {
 			return json('Missing user_id parameter', { status: 400 });
 		}
