@@ -3,9 +3,23 @@
     import { afterNavigate, beforeNavigate, goto } from '$app/navigation'
     import { onMount } from 'svelte';
 
-    // these can be used to show and hide loading spinners
+    export let data;
 
-    beforeNavigate((navigation) => {
+    const userId = $page.params.userId
+    const expenses = data.expenses;
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-ZA", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+    }
+
+     // these can be used to show and hide loading spinners
+
+     beforeNavigate((navigation) => {
         console.log({ before: navigation })
     })
 
@@ -17,36 +31,6 @@
         console.log('Adding Expense')
         goto(`./${userId}/expenses/${userId}`)
     }
-
-    const userId = $page.params.userId
-
-    console.log('USER ID', userId);
-    
-    let expenses = [];
-    let error = null;
-
-    onMount(async () => {
-        try {
-            const res = await fetch(`/demo-api?user_id=${userId}`);
-
-            if (res.ok) {
-                expenses = await res.json();
-            } else {
-                error = 'Failed to fetch data from the server.';
-            }
-        } catch (err) {
-            error = 'An error occurred: ' + err.message;
-        }
-    });
-
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("en-ZA", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-    }
 </script>
 
 <a href="/users">Back</a>
@@ -57,14 +41,12 @@
     <button on:click={handleClick}>Add Expense for User</button>
 </div>
 
-{#if error}
-    <p class="error">{error}</p>
-{:else if !expenses}
+{#if !expenses}
     <p>Loading...</p>
   {:else if expenses.length === 0}
     <p>No expenses for user</p>
   {:else}
-    <h1>Expenses</h1>
+    <h1>{data.title}</h1>
     <ul>
       {#each expenses as expense}
         <li>
