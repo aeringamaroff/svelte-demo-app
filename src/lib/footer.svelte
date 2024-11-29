@@ -2,10 +2,6 @@
 
 <style>
     .layout-footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
         background-color: #264653;
         color: #f4a261;
         font-size: large;

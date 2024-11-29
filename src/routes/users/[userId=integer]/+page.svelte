@@ -17,18 +17,17 @@
         });
     }
 
-     // these can be used to show and hide loading spinners
+    // these can be used to show and hide loading spinners
 
-     beforeNavigate((navigation) => {
+    beforeNavigate((navigation) => {
         console.log({ before: navigation })
     })
 
     afterNavigate((navigation) => {
-        console.log({after: navigation})
+        console.log({ after: navigation })
     })
     
-    const handleClick = () => {
-        console.log('Adding Expense')
+    const addExpense = () => {
         goto(`./${userId}/expenses/${userId}`)
     }
 </script>
@@ -38,7 +37,7 @@
 <h1>Details about user {userId}</h1>
 
 <div style="margin-top: 2%;">
-    <button on:click={handleClick}>Add Expense for User</button>
+    <button on:click={addExpense}>Add Expense for User</button>
 </div>
 
 {#if !expenses}
