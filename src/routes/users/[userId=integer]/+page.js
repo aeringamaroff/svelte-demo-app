@@ -1,13 +1,15 @@
+import Expense from './expense.svelte';
+
 export const load = async ({ fetch, params }) => {
 	const { userId } = params;
 
 	const title = 'Expenses';
-
 	const response = await fetch(`/demo-api?user_id=${userId}`);
 	const expenses = await response.json();
 
 	return {
 		title,
-		expenses
+		expenses,
+		Component: Expense
 	};
 };

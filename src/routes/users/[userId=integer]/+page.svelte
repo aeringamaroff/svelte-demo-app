@@ -7,29 +7,19 @@
 
     const userId = $page.params.userId
     const expenses = data.expenses;
+    const Component = data.Component;
 
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("en-ZA", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-    }
-
-    // these can be used to show and hide loading spinners
-
-    beforeNavigate((navigation) => {
-        console.log({ before: navigation })
-    })
-
-    afterNavigate((navigation) => {
-        console.log({ after: navigation })
-    })
-    
     const addExpense = () => {
         goto(`./${userId}/expenses/${userId}`)
     }
+
+    // these can be used to show and hide loading spinners
+    beforeNavigate((navigation) => {
+        console.log({ before: navigation })
+    })
+    afterNavigate((navigation) => {
+        console.log({ after: navigation })
+    })
 </script>
 
 <a href="/users">Back</a>
@@ -45,20 +35,10 @@
   {:else if expenses.length === 0}
     <p>No expenses for user</p>
   {:else}
-    <h1>{data.title}</h1>
+  <h1>{data.title}</h1>
     <ul>
-      {#each expenses as expense}
-        <li>
-            <p>
-                <strong>
-                    {formatDate(expense.date)}
-                </strong>
-            </p>
-            <p>
-                {expense.title}: <strong>R{expense.amount}</strong>
-            </p>
-            <p>{expense.description}</p>
-        </li>
-      {/each}
+        {#each expenses as expense}
+            <Component {expense}/>
+        {/each}
     </ul>
-  {/if}
+{/if}
