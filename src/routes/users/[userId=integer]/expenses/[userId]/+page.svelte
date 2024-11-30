@@ -4,7 +4,7 @@
     const {userId} = $page.params
 </script>
 
-<a href="/users">Back</a>
+<a href="/users/{userId}">Back</a>
 
 <h1>Add An Expense</h1>
 
