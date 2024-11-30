@@ -27,8 +27,21 @@ export async function GET({ url }) {
 	}
 }
 
-export async function PUT() {
-	// TODO: will write to the db
+export async function POST({ request }) {
+	try {
+		const body = await request.json();
+		const database = client.db('expense-tracker');
+		const expenses = database.collection('user_expenses');
+
+		if (typeof body.date === 'string') body.date = new Date(body.date);
+
+		const result = await expenses.insertOne(body);
+
+		return json({ success: true, insertedId: result.insertedId });
+	} catch (error) {
+		console.error('Error inserting data:', error);
+		return json({ success: false, error: error.message }, { status: 500 });
+	}
 }
 
 export async function DELETE(requestEvent) {

@@ -1,7 +1,6 @@
 <script>
     import { page } from '$app/stores'
     import { afterNavigate, beforeNavigate, goto, invalidate, preloadData } from '$app/navigation'
-    import { onMount } from 'svelte';
 
     export let data;
 
