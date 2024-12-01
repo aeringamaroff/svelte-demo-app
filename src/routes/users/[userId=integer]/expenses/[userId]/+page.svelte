@@ -1,21 +1,19 @@
-<script>
+<script lang="ts">
     import { page } from '$app/stores'
-    import { enhance } from '$app/forms';
+    import type { Expense } from '$lib/interface'
 
     const userId = $page.params.userId;
 
-    const addExpense = async (event) => {
+    const addExpense = async (event: any) => {
 		
         const formData = new FormData(event.target);
 
-        console.log('form data', formData);
-
-        let dto = {
+        let dto: Expense = {
             user_id: userId,
-            amount: formData.get('amount'),
-            title: formData.get('title'),
-            description: formData.get('description'),
-            date: formData.get('date')
+            amount: Number(formData.get('amount')),
+            title: formData.get('title').toString(),
+            description: formData.get('description').toString(),
+            date: formData.get('date').toString()
         }
 
 		const response = await fetch('/api', {
@@ -30,8 +28,6 @@
 
 		return insertResult;
 	};
-
-    let result = null;
 </script>
 
 <a href="/users/{userId}">Back</a>
@@ -41,9 +37,9 @@
 <h2>adding an expense for user {userId}</h2>
 
 <form on:submit|preventDefault={addExpense}>
-    <input type="text" name="title" placeholder="Title">
-    <input type="number" name="amount" placeholder="Amount in Rands">
-    <input type="text" name="description" placeholder="Description">
-    <input type="date" name="date" placeholder="Date">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="number" name="amount" placeholder="Amount in Rands" required>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="date" name="date" placeholder="Date" required>
     <button type="submit">Submit</button>
 </form>

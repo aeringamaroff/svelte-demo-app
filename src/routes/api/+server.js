@@ -1,10 +1,13 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import { MONGODB_PASSWORD, MONGODB_USER } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 
 const uri = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@ruby-cluster.twqrq.mongodb.net/?retryWrites=true&w=majority&appName=ruby-cluster`;
 
 const client = new MongoClient(uri);
+
+const database = client.db('expense-tracker');
+const expenses = database.collection('user_expenses');
 
 export async function GET({ url }) {
 	try {
@@ -13,9 +16,6 @@ export async function GET({ url }) {
 		if (!userId) {
 			return json('Missing user_id parameter', { status: 400 });
 		}
-
-		const database = client.db('expense-tracker');
-		const expenses = database.collection('user_expenses');
 
 		const query = { user_id: userId };
 		const expense = await expenses.find(query).sort({ date: -1 }).toArray();
@@ -30,8 +30,6 @@ export async function GET({ url }) {
 export async function POST({ request }) {
 	try {
 		const body = await request.json();
-		const database = client.db('expense-tracker');
-		const expenses = database.collection('user_expenses');
 
 		if (typeof body.date === 'string') body.date = new Date(body.date);
 
@@ -44,9 +42,12 @@ export async function POST({ request }) {
 	}
 }
 
-export async function DELETE(requestEvent) {
-	// TODO: deletes an expense
+export async function DELETE({ request }) {
+	const { id } = await request.json();
 
-	const { params } = requestEvent;
-	const { expenseId } = params;
+	console.log('delete request', request);
+
+	const result = await expenses.deleteOne({ _id: new ObjectId(id) });
+
+	return json(result);
 }
