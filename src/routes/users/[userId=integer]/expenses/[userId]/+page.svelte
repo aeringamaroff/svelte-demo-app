@@ -1,5 +1,7 @@
 <script lang="ts">
     import { page } from '$app/stores'
+    import { goto } from '$app/navigation'
+    
     import type { Expense } from '$lib/interface'
 
     const userId = $page.params.userId;
@@ -26,7 +28,7 @@
 
 		const insertResult = await response.json();
 
-		return insertResult;
+        goto(`/users/${userId}`)
 	};
 </script>
 

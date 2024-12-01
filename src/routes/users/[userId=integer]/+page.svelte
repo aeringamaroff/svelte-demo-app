@@ -1,6 +1,6 @@
 <script>
     import { page } from '$app/stores'
-    import { afterNavigate, beforeNavigate, goto, invalidate, preloadData } from '$app/navigation'
+    import { afterNavigate, beforeNavigate, goto, invalidate } from '$app/navigation'
 
     export let data;
 
@@ -14,7 +14,7 @@
     }
 
     const refresh = () => {
-        invalidate('./api')
+        invalidate(`/api?user_id=${userId}`)
     }
 
     // these can be used to show and hide loading spinners
@@ -33,15 +33,9 @@
 <h1>Details about user {userId}</h1>
 
 <div style="margin-top: 2%;">
-    <button 
-    on:focus={async () => {
-        await preloadData(`./${userId}/expenses/${userId}`)
-    }} 
-    on:mouseover={async () => {
-        await preloadData(`./${userId}/expenses/${userId}`)
-    }} 
+    <button
     on:click={addExpense}>
-        Add Expense for User
+        Add Expense
     </button>
 </div>
 

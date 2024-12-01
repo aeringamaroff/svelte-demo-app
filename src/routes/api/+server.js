@@ -45,8 +45,6 @@ export async function POST({ request }) {
 export async function DELETE({ request }) {
 	const { id } = await request.json();
 
-	console.log('delete request', request);
-
 	const result = await expenses.deleteOne({ _id: new ObjectId(id) });
 
 	return json(result);
