@@ -34,6 +34,7 @@
 
 <div style="margin-top: 2%;">
     <button
+    class="btn btn-primary"
     on:click={addExpense}>
         Add Expense
     </button>
