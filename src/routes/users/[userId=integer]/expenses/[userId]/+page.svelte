@@ -1,22 +1,34 @@
-<script lang="ts">
+<script>
     import { page } from '$app/stores'
     import { goto } from '$app/navigation'
-    
-    import type { Expense } from '$lib/interface'
+    import { z } from "zod";
+	import Expense from '../../expense.svelte';
 
     const userId = $page.params.userId;
 
-    const addExpense = async (event: any) => {
+    const addExpense = async (event) => {
 		
         const formData = new FormData(event.target);
 
-        let dto: Expense = {
+        let dto = {
             user_id: userId,
             amount: Number(formData.get('amount')),
-            title: formData.get('title').toString(),
-            description: formData.get('description').toString(),
-            date: formData.get('date').toString()
+            title: formData.get('title'),
+            description: formData.get('description'),
+            date: formData.get('date')
         }
+
+        // invalidation with zod
+
+        const Expense = z.object({
+            user_id: z.string(),
+            amount: z.number(),
+            title: z.string(),
+            description: z.string(),
+            date: z.string()
+        });
+
+        Expense.parse(dto)
 
 		const response = await fetch('/api', {
 			method: 'POST',
