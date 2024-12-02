@@ -41,7 +41,7 @@
 </div>
 
 <div style="margin-top: 2%;">
-    <button on:click={refresh}>Refresh</button>
+    <button class="btn btn-warning" on:click={refresh}>Refresh</button>
 </div>
 
 {#if !expenses}
@@ -49,7 +49,6 @@
   {:else if expenses.length === 0}
     <p>No expenses for user</p>
   {:else}
-  <h1>{data.title}</h1>
     <ul>
         {#each expenses as expense}
             <Component {expense}/>
