@@ -43,7 +43,7 @@
 
     <p>{expense.description}</p>
 
-    <button on:click={removeExpense}>delete</button>
+    <button class="btn btn-error btn-sm" on:click={removeExpense}>delete</button>
 
-    <hr style="width: 50%; margin-left: 0;"/>
+   <div class="divider"></div>
 </li>

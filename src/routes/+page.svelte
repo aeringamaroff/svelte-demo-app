@@ -1,5 +1,10 @@
 <script>
-    import { afterNavigate, beforeNavigate } from '$app/navigation'
+    import { afterNavigate, beforeNavigate, goto } from '$app/navigation'
+
+
+    const viewUsers = () => {
+        goto('/users')
+    }
 
     // these can be used to show and hide loading spinners
 
@@ -12,8 +17,10 @@
     })
 </script>
 
-<h2>Welcome to SvelteKit</h2>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-
-<a href="/users">Users</a>
-
+<div class="max-w-md">
+<h1 class="text-5xl font-bold">Demo Expense Tracking App</h1>
+<p class="py-6">
+    Expenses can be viewed, added and removed from a list of users
+</p>
+<button class="btn btn-primary" on:click={viewUsers}>Users</button>
+</div>

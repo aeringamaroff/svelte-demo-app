@@ -1,4 +1,4 @@
-<header class="layout-header">Expense Tracking App</header>
+<header class="navbar text-xl">Expense Tracking App</header>
 
 <style>
     .layout-header {

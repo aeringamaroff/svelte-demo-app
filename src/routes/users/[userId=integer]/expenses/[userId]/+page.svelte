@@ -44,16 +44,14 @@
 	};
 </script>
 
-<a href="/users/{userId}">Back</a>
-
-<h1>Add An Expense</h1>
+<a href="/users/{userId}" class="link link-accent">Back</a>
 
 <h2>adding an expense for user {userId}</h2>
 
 <form on:submit|preventDefault={addExpense}>
-    <input type="text" name="title" placeholder="Title" required>
-    <input type="number" name="amount" placeholder="Amount in Rands" required>
-    <input type="text" name="description" placeholder="Description" required>
-    <input type="date" name="date" placeholder="Date" required>
+    <input type="text" name="title" placeholder="Title" class="input w-full max-w-xs" required>
+    <input type="number" name="amount" placeholder="Amount in Rands" class="input w-full max-w-xs" required>
+    <input type="text" name="description" placeholder="Description" class="input w-full max-w-xs" required>
+    <input type="date" name="date" placeholder="Date" class="input w-full max-w-xs" required>
     <button type="submit">Submit</button>
 </form>

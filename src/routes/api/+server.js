@@ -2,7 +2,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import { MONGODB_PASSWORD, MONGODB_USER } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 
-const uri = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@ruby-cluster.twqrq.mongodb.net/?retryWrites=true&w=majority&appName=ruby-cluster`;
+const uri = `mongodb+srv://aeringamaroff:${MONGODB_PASSWORD}@ruby-cluster.twqrq.mongodb.net/?retryWrites=true&w=majority&appName=ruby-cluster`;
 
 const client = new MongoClient(uri);
 

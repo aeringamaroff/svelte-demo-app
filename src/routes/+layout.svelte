@@ -11,4 +11,3 @@
 <Header />
 
 <slot />
-

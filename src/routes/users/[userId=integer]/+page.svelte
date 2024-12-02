@@ -28,13 +28,13 @@
     
 </script>
 
-<a href="/users">Back</a>
+<a href="/users" class="link link-accent">Back</a>
 
 <h1>Details about user {userId}</h1>
 
 <div style="margin-top: 2%;">
     <button
-    class="btn btn-primary"
+    class="btn btn-success"
     on:click={addExpense}>
         Add Expense
     </button>
